@@ -68,49 +68,7 @@
 		\end{itemize}
 		
 	\section{Overall System Design}
-	    The system will be designed using the \textbf{n-tier} architecture (Specifically 3-tier), where the system is divided into three layers:
-	    \begin{itemize}
-	        \item Presentation Layer
-	        \item Application Layer
-	        \item Data layer
-	    \end{itemize}
-	    
-	    \subsection{Why}
-	    This architecture brings several advantages:
-	    \begin{enumerate}
-	        \item Each layer will be modifiable without having to change the entire application.
-	        \item As a result of the above, maintenance and adding extra functionality is easier.
-	        \item Overall complexity of code over all layers will be reduced.
-	        \item Layers are reusable in other applications.
-	        \item As the system will likely be designed over several groups due to the nature of COS301, this will allow different groups to modify different layers without interference.
-	        \item It is possible to deploy each layer (Specifically the data and application layers) over multiple different locations for better reliability and performance.
-	    \end{enumerate}
-	    
-	    \subsection{Presentation Layer}
-	        This is the layer the user will be interacting with. It encompasses the actual apps (Android, iOS and web), and any interactions that the users have with them.
-	        
-	    \subsection{Application Layer}
-	        The application layer contains all the \textit{business logic} of the system - it makes logical decisions based on the interactions from the presentation layer and the data from the data layer.  \\
-	        The decisions made by this layer include:
-	        \begin{itemize}
-	            \item Routes to be navigated.
-	            \item Whether to allow a user to login/register.
-	            \item Heatmap generation.
-	            \item Creation and maintenace of a GIS Map of the Campus.
-	            \item Treasure hunting activities by making use Geocaching.
-	        \end{itemize}
-	        
-	    \subsection{Data Layer}
-	        The data layer is where the data and information used by the application layer is stored. This information includes:
-	        \begin{itemize}
-	            \item Student and staff information.
-	            \item Waypoint history.
-	            \item WiFi router locations.
-	            \item Points of interest.
-	            \item Information related to games and reward systems.
-	            \item List of Events and their locations.
-	            
-	        \end{itemize}
+	    The system will be designed using the \textbf{n-tier} architecture, where the system is divided into multiple layers, and information is passed from one layer to another.
 	        
 	   \subsection{Deployment}
 	        \textless insert deployment diagram here\textgreater
@@ -118,7 +76,8 @@
 	% ----- USERS ----- %
 	\section{Users}
 	    \begin{figure}[H]
-            \centering	            \centerline{\fbox{\includegraphics[scale=0.4]{Class-Diagram-Users}}}
+            \centering	            
+            \centerline{\fbox{\includegraphics[scale=0.5]{Class-Diagram-Users}}}
             \caption{Class Diagram - Users Module}
         \end{figure}
 	
@@ -126,7 +85,6 @@
 	\section{Navigation}	
         \subsection{Description}
             The purpose of the Navigation subsystem is to provide routes to users based on their destination and current location, as well as navigating the users along the route to their destination.\\
-            This subsystem will reside almost entirely in the application layer, as it is comprised mostly of decisions related to navigation.
        
        \subsection{Requirements}
             The Navigation system should be able to:
@@ -140,9 +98,9 @@
         \subsection{Constraints}
             The system must operate under the following constraints:
             \begin{itemize}
-                \item Any location data is received from the GIS subsystem, and is assumed to be correct.
+                \item Any location data is received from the location subsystem, and is assumed to be correct.
                 \item The destination is received from the user, and may be impossible to navigate to.
-                \item The system has to work with the map as provided by GIS, which may have missing locations or locations that are incorrectly placed.
+                \item The system has to work with the map as provided by the GIS subsystem, which may have missing locations or locations that are incorrectly placed.
             \end{itemize}
             
         \subsection{Design}
@@ -165,48 +123,105 @@
             The nodes would be saved as \textit{Location} objects, and the route calculated by a \texttt{RouteAlgorithm} object.
         
         \begin{figure}[H]
-            \centering	            \centerline{\fbox{\includegraphics[scale=0.75]{Graph-Navigation.png}}}
+            \centering	            
+            \centerline{\fbox{\includegraphics[scale=0.75]{Graph-Navigation.png}}}
             \caption{Example Navigation Graph - Navigation Module}
         \end{figure}    
         
         \begin{figure}[H]
-            \centering	            \centerline{\fbox{\includegraphics[scale=0.45]{State-Diagram-Navigation.png}}}
+            \centering	            
+            \centerline{\fbox{\includegraphics[scale=0.45]{State-Diagram-Navigation.png}}}
             \caption{State Diagram - Navigation Module}
         \end{figure} 
           
         \begin{figure}[H]
-            \centering	            \centerline{\fbox{\includegraphics[scale=0.65]{Case-Diagram-Navigation.png}}}
+            \centering	            
+            \centerline{\fbox{\includegraphics[scale=0.65]{Case-Diagram-Navigation.png}}}
             \caption{Use Case Diagram - Navigation Module}
         \end{figure}
             
     % ----- DATA ----- %    
     \section{Data}
         \begin{figure}[H]
-            \centering	            \centerline{\includegraphics[scale=0.5]{Data Use Case Diagram.png}}
+            \centering	            
+            \centerline{\includegraphics[scale=0.5]{Case-Diagram-Data.png}}
             \caption{Use Case Diagram - Data Module}
         \end{figure} 
         
         \begin{figure}[H]
-            \centering	            \centerline{\fbox{\includegraphics[scale=0.5]{Data Activity Diagram.png}}}
+            \centering	            
+            \centerline{\fbox{\includegraphics[scale=0.5]{Activity-Diagram-Data.png}}}
             \caption{Activity Diagram - Data Module}
+        \end{figure} 
+        
+        \begin{figure}[H]
+            \centering	            
+            \centerline{\fbox{\includegraphics[scale=0.4]{Database-Diagram-Data.png}}}
+            \caption{Database Diagram - Data Module}
+        \end{figure} 
+        
+        \begin{figure}[H]
+            \centering	            
+            \centerline{\fbox{\includegraphics[scale=0.5]{Sequence-Diagram-Data.png}}}
+            \caption{Sequence Diagram - Data Module}
+        \end{figure} 
+        
+        \begin{figure}[H]
+            \centering	            
+            \centerline{\fbox{\includegraphics[scale=0.37]{Storage-Diagram-Data.png}}}
+            \caption{Storage Diagram - Data Module}
         \end{figure} 
         
     % ----- SURVEILLANCE ----- %
     \section{Surveillance}    
+        \subsection{Description}    
+            The purpose of the surveillance subsystem is to be able to identify locations where there is pedestrian congestion on the walkways of the university.
+            By being able to find how many people are connected to the UP routers, which cover a large portion of campus, we are able to more accurately identify these hot-spots and provide this data to the navigation team, in order for people to try avoid these areas. Thus spreading the amount of pedestrians to hopefully avoid highly congested areas. 
+        \subsection{Requirements}
+        The Surveillance sustem should be able to:
+            \begin{itemize}
+                \item Count the number of users connected to a particular router.
+                \item Provide a live time data feed of the number of users connected.
+                \item Identify the location of each router.
+                \item Add or update routers in the system.
+                \item Provide loose coupling.
+                \item Update the database with information of route congestion in a particular location.
+            \end{itemize}
+    
+        \subsection{Constraints}
+        The Surveillance system should operate under the following constraints:
+            \begin{itemize}
+                \item The list of routers is supplied and assumed to be correct.
+                \item Routers are able to connect and receive data from users.
+                \item Usernames and passwords for all routers are provided by admins.
+            \end{itemize}
+        
+        \subsection{Design}    
+            The surveillance system is implemented using seven classes. We used the mediator design pattern for its implementation.
+    
+            \subparagraph{Mediator} - The mediator design pattern allows for having two systems (Location and Database) that could then be updated and the same time. \\
+            
+            This behaviour of this system is important as it allows other modules to also receive a live time feed of every router, but from the database, and not from the surveillance module itself.
+            This means that should the surveillance module be taken away no other module would be directly affected and the system would be able to still work. This pattern has therefore allowed us to have low coupling with high cohesion.
+    
+        \subsection{Implementation Details}    
+            To implement the data structure we will use a data structure (linked list, array or vector) to store all the information of the routers and be able to dynamically add to that data structure, while being able to update both data structures on both the database and surveillance module. Way-points which inherit from the locations are  used as the Navigation module has to exist for the program to perform its main purpose, and to avoid duplicating code I inherit from location rather than create a brand new class.
+
         \begin{figure}[H]
-            \centering	            \centerline{\fbox{\includegraphics[scale=0.3]{Class-Diagram-Surveillance}}}
+            \centering	            
+            \centerline{\fbox{\includegraphics[scale=0.35]{Class-Diagram-Surveillance}}}
             \caption{Class Diagram - Surveillance Module}
         \end{figure}
         
         \begin{figure}[H]
-            \centering	            \centerline{\fbox{\includegraphics[scale=0.5]{State-Diagram-Surveillance}}}
+            \centering	            
+            \centerline{\fbox{\includegraphics[scale=0.4]{State-Diagram-Surveillance}}}
             \caption{State Diagram - Surveillance Module}
         \end{figure}
         
         \begin{figure}[H]
-            \centering	            \centerline{\fbox{\includegraphics[scale=0.5]{Case-Diagram-Surveillance}}}
+            \centering	            
+            \centerline{\fbox{\includegraphics[scale=0.5]{Case-Diagram-Surveillance}}}
             \caption{Use Case Diagram - Surveillance Module}
-        \end{figure}
-        
-	
+        \end{figure}    
 \end{document}
