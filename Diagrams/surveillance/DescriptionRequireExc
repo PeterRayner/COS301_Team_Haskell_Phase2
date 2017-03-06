@@ -1,0 +1,43 @@
+Surveillance:
+
+Description:
+
+The purpose of the surveillance subsystem is to be able to identify locations where there is perdestrian congestion on the walkways of the university.
+By being able to find how many people are connected to the TUKS wifi routers ,which cover a large portion of campus, we are able to more accurately identify these
+hotspots and provide this data to the navigation team, in order for people to try avoid these areas. Thus spreading the amount of pedestrians to hopefully avoid highly 
+congested areas. 
+
+
+Requirements:
+The surveillance system should be able to do:
+-Count the number of users connected to a particular router 
+- Provide a live time data feed of the number of users connected
+-Identify the location of each router
+-Add or update Routers to the system.
+-provide loose coupling
+-update the database with information of route congestion in a particular location
+
+Constraints:
+the Surveillance system must operate under the following constraints:
+-All Routers counts are assumed as correct.
+- The location of the Routers are correct.
+-Routers are able to connect and receive data from users
+-Admin must provide passwords and usernames for all routers
+
+Design:
+
+The surveillance system is implementes using seven classes . We used the mediator design pattern for its implementation.
+
+Mediator: The mediator design pattern allowed to have two classes (Location and database) that could then be updated and the same time.
+This behaviour of this system was important as it allows other modules to also recieve a live time feed of every router , but from the database, and not from the surveillance
+module itself
+. This means that should the serveillance module be taken away no other module would be directly affected and the system would be able to still work. This pattern has therefore allowed us 
+to have low coupling and high cohesion.
+
+Implementation Details:
+
+To implement the data structure we will use a data structure (linked list ,array or vector) to store all the information of the routers and be able to dynamically 
+add to that data structure , while being able to update both data structures on both the database and surveillance module. Waypoints which inherate from the locations 
+ was used as the Navigation module has exist for the program to perform its main purpose, and to avoid duplicating code I decided to inherite from location rather than create
+ a brand new class.
+
