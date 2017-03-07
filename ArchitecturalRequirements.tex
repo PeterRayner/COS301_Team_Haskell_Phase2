@@ -13,7 +13,7 @@
 	\texttt{14197520}
 	\and
 	Moodley, Joshua\\
-	\texttt{150595538}
+	\texttt{14152152}
 	\and
 	Kazadi, Dieumerci\\
 	\texttt{17308632}
@@ -52,9 +52,7 @@
 
 	\pagenumbering{arabic}
 
-
 	\section{Introduction}
-
 		This document will serve to outline the architectural requirements, constraints and design for the NavUP system. The general pattern that the system will be built around will also be discussed.\\
         \\
 		In addition, the subsystems will be descried along with their planned implementation, accompanied by relevant diagrams. With regards to the subsystems, focus will be put onto designing the subsystems to be modular and loosely coupled in such a way that the system can be deployed with a minimal set of subsystems, and each subsystem can be changed without affecting the others.\\
@@ -69,29 +67,26 @@
 
 	\section{Overall System Design}
 	    The system will be designed using the \textbf{n-tier} architecture, where the system is divided into multiple layers, and information is passed from one layer to another.
-	        
-	            \item Treasure hunting activities by making use Geocaching.
-	        \end{itemize}
 
-	    \subsection{Data Layer}
-	        The data layer is where the data and information used by the application layer is stored. This information includes:
-	        \begin{itemize}
-	            \item Student and staff information.
-	            \item Waypoint history.
-	            \item WiFi router locations.
-	            \item Points of interest.
-	            \item Information related to games and reward systems.
-	            \item List of Events and their locations.
-
-	        \end{itemize}
 	   \subsection{Deployment}
-	        \textless insert deployment diagram here\textgreater
+	        \begin{figure}[H]
+            \centering	            \centerline{\fbox{\includegraphics[scale=0.3]{Deployment-Diagram.png}}}
+            \caption{Use Case Diagram - Users Module}
+        \end{figure}
 
 	% ----- USERS ----- %
 	\section{Users}
+	    The Users module is responsible for the management of NavUP's users. There will be 3 categories of users of the system, Guest users, which will be able to access public services without having to be logged in. Registered users, which will in addition to the public services will be able to store profile information necessary for other activities provided by the system and Admin users which will have the additional ability to manage the users of the system.
+		
+		In the figure below, is a use case diagram that shows how each user will be able to make use of the User's module and what functionality will be included in order to achieve the use cases.
+		\begin{figure}[H]
+            \centering	            \centerline{\fbox{\includegraphics[scale=0.4]{Users Use Case Diagram}}}
+            \caption{Use Case Diagram - Users Module}
+        \end{figure}
+		
+		In the figure below is a class diagram that shows the classes of the User's subsystem.
 	    \begin{figure}[H]
-            \centering	            
-            \centerline{\fbox{\includegraphics[scale=0.5]{Class-Diagram-Users}}}
+            \centering	            \centerline{\fbox{\includegraphics[scale=0.4]{UsersClassDiagram.png}}}
             \caption{Class Diagram - Users Module}
         \end{figure}
 
@@ -192,7 +187,7 @@
             The purpose of the surveillance subsystem is to be able to identify locations where there is pedestrian congestion on the walkways of the university.
             By being able to find how many people are connected to the UP routers, which cover a large portion of campus, we are able to more accurately identify these hot-spots and provide this data to the navigation team, in order for people to try avoid these areas. Thus spreading the amount of pedestrians to hopefully avoid highly congested areas. 
         \subsection{Requirements}
-        The Surveillance sustem should be able to:
+        The Surveillance system should be able to:
             \begin{itemize}
                 \item Count the number of users connected to a particular router.
                 \item Provide a live time data feed of the number of users connected.
@@ -237,5 +232,11 @@
             \centering	            
             \centerline{\fbox{\includegraphics[scale=0.5]{Case-Diagram-Surveillance}}}
             \caption{Use Case Diagram - Surveillance Module}
+        \end{figure}  
+        
+        \begin{figure}[H]
+            \centering	            
+            \centerline{\fbox{\includegraphics[scale=0.4]{Activity-Diagram-Surveillance}}}
+            \caption{Activity Diagram - Surveillance Module}
         \end{figure}    
 \end{document}
