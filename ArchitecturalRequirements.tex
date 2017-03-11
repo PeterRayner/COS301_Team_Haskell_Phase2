@@ -9,89 +9,88 @@
 \oddsidemargin = 17pt
 
 \author{
-	Jita, Hlengekile\\
-	\texttt{14077893}
-	\and
-	Moodley, Joshua\\
-	\texttt{150595538}
-	\and
-	Kazadi, Dieumerci\\
-	\texttt{17308632}
-	\and
-	Nell, Stephan\\
-	\texttt{15124861}
-	\and
-	Rayner, Peter\\
-	\texttt{15312144}
-	\and
-	Van Hattum, Jason\\
-	\texttt{15027458}
-	\and
-	Schuld, Bernhard\\
-	\texttt{10297902}
+    Jita, Hlengekile\\
+    \texttt{u14077893}
+    \and
+    Moodley, Joshua\\
+    \texttt{u14152152}
+    \and
+    Kazadi, Dieumerci\\
+    \texttt{u16353383}
+    \and
+    Nell, Stephan\\
+    \texttt{u15124861}
+    \and
+    Rayner, Peter\\
+    \texttt{u14001757}
+    \and
+    Van Hattum, Jason\\
+    \texttt{u15027458}
+    \and
+    Schuld, Bernhard\\
+    \texttt{u10297902}
 }
 
 \title{Architectural Requirements Specification\\
-	for the NavUP System\\
-	}
+    for the NavUP System\\
+    }
 \date{\today}
 \graphicspath{{Images/}}
 
 \begin{document}
     \fboxsep=2mm
 
-	\maketitle
-	\begin{figure}[!t]
-		\includegraphics{up_logo.png}
-	\end{figure}
-	\pagenumbering{gobble}
-	\newpage
+    \maketitle
+    \begin{figure}[!t]
+        \includegraphics{up_logo.png}
+    \end{figure}
+    \pagenumbering{gobble}
+    \newpage
 
-	\tableofcontents
-	\newpage
+    \tableofcontents
+    \newpage
 
-	\pagenumbering{arabic}
+    \pagenumbering{arabic}
 
 
-	\section{Introduction}
-
-		This document will serve to outline the architectural requirements, constraints and design for the NavUP system. The general pattern that the system will be built around will also be discussed.\\
+    \section{Introduction}
+        This document will serve to outline the architectural requirements, constraints and design for the NavUP system. The general pattern that the system will be built around will also be discussed.\\
         \\
-		In addition, the subsystems will be descried along with their planned implementation, accompanied by relevant diagrams. With regards to the subsystems, focus will be put onto designing the subsystems to be modular and loosely coupled in such a way that the system can be deployed with a minimal set of subsystems, and each subsystem can be changed without affecting the others.\\
-		\\
-		The modules that the document will outline are:
-		\begin{itemize}
-		    \item Data.
-		    \item Users.
-		    \item Navigation.
-		    \item Surveillance.
-		\end{itemize}
+        In addition, the subsystems will be descried along with their planned implementation, accompanied by relevant diagrams. With regards to the subsystems, focus will be put onto designing the subsystems to be modular and loosely coupled in such a way that the system can be deployed with a minimal set of subsystems, and each subsystem can be changed without affecting the others.\\
+        \\
+        The modules that the document will outline are:
+        \begin{itemize}
+            \item Data.
+            \item Users.
+            \item Navigation.
+            \item Surveillance.
+        \end{itemize}
 
     \section{Overall System Design}
         \subsection{Architecture}
-	    The system will be designed using the \textbf{n-tier} architecture, where the system is divided into multiple layers, and information is passed from one layer to another. The direction of information transfer is described in further detail in our deployment diagram.
+        The system will be designed using the \textbf{n-tier} architecture, where the system is divided into multiple layers, and information is passed from one layer to another. The direction of information transfer is described in further detail in our deployment diagram.
 
-	   \subsection{Deployment}
-	        \begin{figure}[H]
-            \centering	            
-            \centerline{\fbox{\includegraphics[scale=0.3]{Deployment-Diagram.png}}}
+       \subsection{Deployment}
+            \begin{figure}[H]
+            \centering              
+            \centerline{\fbox{\includegraphics[scale=0.2]{Deployment-Diagram.png}}}
             \caption{Deployment Diagram}
         \end{figure}
 
-	% ----- USERS ----- %
-	\newpage
-	\section{Users}
-		The Users module is responsible for the management of NavUP's users. There will be 3 categories of users of the system, Guest users, which will be able to access public services without having to be logged in. Registered users, which will in addition to the public services will be able to store profile information necessary for other activities provided by the system and Admin users which will have the additional ability to manage the users of the system.
-		
-		In the figure below, is a use case diagram that shows how each user will be able to make use of the Users module and what functionality will be included in order to achieve the use cases.
-		\begin{figure}[H]
-            \centering	            \centerline{\fbox{\includegraphics[scale=0.5]{Users Use Case Diagram.png}}}
+    % ----- USERS ----- %
+    \newpage
+    \section{Users}
+        The Users module is responsible for the management of NavUP's users. There will be 3 categories of users of the system, Guest users, which will be able to access public services without having to be logged in. Registered users, which will in addition to the public services will be able to store profile information necessary for other activities provided by the system and Admin users which will have the additional ability to manage the users of the system.
+        
+        In the figure below, is a use case diagram that shows how each user will be able to make use of the Users module and what functionality will be included in order to achieve the use cases.
+        \begin{figure}[H]
+            \centering              \centerline{\fbox{\includegraphics[scale=0.5]{Users Use Case Diagram.png}}}
             \caption{Use Case Diagram - Users Module}
         \end{figure}
-		
-		In the figure below is a class diagram that shows the classes of the Users subsystem.
-	    \begin{figure}[H]
-            \centering	            \centerline{\fbox{\includegraphics[scale=0.6]{UsersClassDiagram.png}}}
+        
+        In the figure below is a class diagram that shows the classes of the Users subsystem.
+        \begin{figure}[H]
+            \centering              \centerline{\fbox{\includegraphics[scale=0.6]{UsersClassDiagram.png}}}
             \caption{Class Diagram - Users Module}
         \end{figure}
         
@@ -99,7 +98,7 @@
 
     % ----- NAVIGATION ----- %
     \newpage
-	\section{Navigation}
+    \section{Navigation}
         \subsection{Description}
             The purpose of the Navigation subsystem is to provide routes to users based on their destination and current location, as well as navigating the users along the route to their destination.\\
             This subsystem will reside almost entirely in the application layer, as it is comprised mostly of decisions related to navigation.
@@ -131,7 +130,7 @@
             One of the requirements of the system is to save the route. The system will accomplish this by saving the waypoints as they are reached. The Memento design pattern is used here - each waypoint is saved as a \texttt{WaypointMemento} object to the database, which ensures that the state is unchanged when the object is recovered at a later stage.
 
         \begin{figure}[H]
-            \centering	            
+            \centering              
             \centerline{\fbox{\includegraphics[scale=0.25]{Navigation-Class-Diagram.png}}}
             \caption{Class Diagram - Navigation Module}
         \end{figure}
@@ -142,19 +141,19 @@
             The nodes would be saved as \textit{Location} objects, and the route calculated by a \texttt{RouteAlgorithm} object.
 
         \begin{figure}[H]
-            \centering	            
+            \centering              
             \centerline{\fbox{\includegraphics[scale=0.75]{Graph-Navigation.png}}}
             \caption{Example Navigation Graph - Navigation Module}
         \end{figure}
 
         \begin{figure}[H]
-            \centering	            
+            \centering              
             \centerline{\fbox{\includegraphics[scale=0.45]{Navigation-State-Diagram.png}}}
             \caption{State Diagram - Navigation Module}
         \end{figure}
 
         \begin{figure}[H]
-            \centering	            
+            \centering              
             \centerline{\fbox{\includegraphics[scale=0.65]{Navigation-Case-Diagram.png}}}
             \caption{Use Case Diagram - Navigation Module}
         \end{figure}
@@ -162,33 +161,53 @@
     % ----- DATA ----- %
     \newpage
     \section{Data}
+        \subsection{Description}
+        The data subsystem is responsible for handling and responding to requests for information, as well as persisting information to a database.
+        
+        \subsection{Requirements}
+        \begin{itemize}
+            \item The database should be able to manage a very large amount of concurrent requests.
+            \item Data requests should be performed reliably and consistently.
+            \item Data should be duplicated (Such as in RAID 5) or backed up for redundancy and performance.
+        \end{itemize}
+        
+        \subsection{Constraints}
+        \begin{itemize}
+            \item The system has to store data of similar types for consistency.
+            \item The system has to make use of the existing UP server infrastructure.
+        \end{itemize}
+        
+        \subsection{Implementation Details}
+        The Data subsystem provides the role of Broker in the entire system, in the sense that all requests for information are made through the data subsystem. This allows for low coupling. The actual data system will be implemented as an Iterator, as seen in the class diagram. This is to allow data responses to be accessed without exposing their underlying representation. This promotes component-based development, boosts productivity in data access, and reduces configuration management in the database.\\
+        The database used by the Data subsystem will make use of a SQL database in order to be consistent with the existing UP database infrastructure.
+        
         \begin{figure}[H]
-            \centering	            
+            \centering              
             \centerline{\includegraphics[scale=0.5]{Data-Case-Diagram.png}}
             \caption{Use Case Diagram - Data Module}
         \end{figure}
         
         \begin{figure}[H]
-            \centering	            
+            \centering              
             \centerline{\fbox{\includegraphics[scale=0.5]{Data-Sequence-Diagram.png}}}
             \caption{Sequence Diagram - Data Module}
         \end{figure} 
 
         \begin{figure}[H]
-            \centering	            
+            \centering              
             \centerline{\fbox{\includegraphics[scale=0.5]{Data-Activity-Diagram.png}}}
             \caption{Activity Diagram - Data Module}
 
         \end{figure} 
         
         \begin{figure}[H]
-            \centering	            
+            \centering              
             \centerline{\fbox{\includegraphics[scale=0.4]{Data-Database-Diagram.png}}}
             \caption{Database Diagram - Data Module}
         \end{figure}     
         
         \begin{figure}[H]
-            \centering	            
+            \centering              
             \centerline{\fbox{\includegraphics[scale=0.37]{Data-Class-Diagram.png}}}
             \caption{Class Diagram - Data Module}
         \end{figure} 
@@ -230,25 +249,25 @@
             To implement the data structure we will use a data structure (linked list, array or vector) to store all the information of the routers and be able to dynamically add to that data structure, while being able to update both data structures on both the database and surveillance module. Way-points which inherit from the locations are  used as the Navigation module has to exist for the program to perform its main purpose, and to avoid duplicating code I inherit from location rather than create a brand new class.
 
         \begin{figure}[H]
-            \centering	            
+            \centering              
             \centerline{\fbox{\includegraphics[scale=0.35]{Surveillance-Class-Diagram.png}}}
             \caption{Class Diagram - Surveillance Module}
         \end{figure}
 
         \begin{figure}[H]
-            \centering	            
+            \centering              
             \centerline{\fbox{\includegraphics[scale=0.4]{Surveillance-State-Diagram.png}}}
             \caption{State Diagram - Surveillance Module}
         \end{figure}
 
         \begin{figure}[H]
-            \centering	            
+            \centering              
             \centerline{\fbox{\includegraphics[scale=0.5]{Surveillance-Case-Diagram.png}}}
             \caption{Use Case Diagram - Surveillance Module}
         \end{figure}  
         
         \begin{figure}[H]
-            \centering	            
+            \centering              
             \centerline{\fbox{\includegraphics[scale=0.4]{Surveillance-Activity-Diagram.png}}}
             \caption{Activity Diagram - Surveillance Module}
         \end{figure}    
